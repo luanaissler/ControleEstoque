@@ -34,6 +34,8 @@ Route::resource('fornecedor', 'FornecedorController');
 
 Route::resource('vendedor', 'VendedorController');
 
+Route::resource('produtoestoque', 'ProdutoEstoqueController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
