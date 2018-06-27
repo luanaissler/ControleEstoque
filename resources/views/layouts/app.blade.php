@@ -66,6 +66,9 @@
                                         <a class="dropdown-item" href="{{ route('vendedor.index') }}">
                                             Vendedores
                                         </a>
+                                        <a class="dropdown-item" href="{{route('produtoestoque.index')}}">
+                                            Quantidade
+                                        </a>
 
 
                                         <a  class="dropdown-item" href="{{ route('logout') }}"
@@ -94,7 +97,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+            @endif
 
         @yield('content')
     </div>

@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="page-header">Vendedores</h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('produto.index') }}">Vendedores</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('vendedor.index') }}">Vendedores</a></li>
             <li class="breadcrumb-item active">Editar</li>
         </ol>
 
@@ -18,8 +18,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="estoqueSelect">Contato</label>
-                    <select name="id_estoque" class="form-control" id="estoqueSelect">
+                    <label for="fornecedorSelect">Fornecedor</label>
+                    <select name="id_fornecedor" class="form-control" id="fornecedorSelect">
                         <option value="empty">Selecione um fornecedor</option>
                         @foreach($fornecedores as $fornecedor)
                             @if($vendedor->id_fornecedor == $fornecedor->id)

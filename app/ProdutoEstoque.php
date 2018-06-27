@@ -14,9 +14,9 @@ class ProdutoEstoque extends Model
         'quantidade'
     ];
     public function estoque() {
-        return $this->hasMany(Pecas::class);
+        return $this->hasMany(Produto::class);
     }
-    public function produtp() {
+    public function produto() {
         return $this->hasMany(Produto::class);
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Estoque;
+use App\Produto;
+use App\ProdutoEstoque;
 
 class ProdutoEstoqueController extends Controller
 {
@@ -13,7 +16,12 @@ class ProdutoEstoqueController extends Controller
      */
     public function index()
     {
-        //
+        return view('produtoestoque.index', [
+            'produtoestoque' => ProdutoEstoque::orderBy('id')->get(),
+            'estoques' => Estoque::all(),
+            'produtos' => Produto::all()
+        ]);
+
     }
 
     /**
@@ -23,7 +31,11 @@ class ProdutoEstoqueController extends Controller
      */
     public function create()
     {
-        //
+        return view('produtoestoque.create', [
+            'estoque' => Estoque::orderBy('nome')->get(),
+            'produto' => Produto::orderBy('nome')->get()
+        ]);
+
     }
 
     /**
@@ -34,7 +46,13 @@ class ProdutoEstoqueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produtoestoque = new ProdutoEstoque($request->all());
+        if ($produtoestoque->save()) {
+            return redirect()->route('produtoestoque.index')->with('message', 'Vendedor criado com sucesso!');
+        } else {
+            return redirect()->route('produtoestoque.index')->with('message', 'Erro na criação do vendedor!');
+        }
+
     }
 
     /**
@@ -43,9 +61,11 @@ class ProdutoEstoqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProdutoEstoque $produtoestoque)
     {
-        //
+        return view('produtoestoque.show', [
+            'produtoestoque' => $produtoestoque
+        ]);
     }
 
     /**
@@ -54,9 +74,13 @@ class ProdutoEstoqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProdutoEstoque $produtoestoque)
     {
-        //
+        return view('produtoestoque.edit', array(
+            'produtoestoque' => $produtoestoque,
+            'produtos' => Produto::all(),
+            'estoques' => Estoque::all()
+        ));
     }
 
     /**
@@ -66,9 +90,10 @@ class ProdutoEstoqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ProdutoEstoque $produtoestoque)
     {
-        //
+        $produtoestoque->update($request->all());
+        return redirect()->route('produtoestoque.index');
     }
 
     /**
@@ -77,8 +102,9 @@ class ProdutoEstoqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ProdutoEstoque $produtoestoque)
     {
-        //
+        $produtoestoque->delete();
+        return redirect()->route('produtoestoque.index');
     }
 }

@@ -38,10 +38,21 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $produto = new Produto($request->all());
+        if ($produto->save()) {
+            return redirect()->route('produto.index')->with('message', 'Estoque criado com sucesso!');
+        } else {
+            return redirect()->route('produto.index')->with('message', 'Erro na criação do estoque!');
+        }
         \Session::flash('flash_message', [
             'message'=>'Produto cadastrado com sucesso!',
             'class'=>'alert-success'
         ]);
+        $estoque = new Estoque($request->all());
+        if ($estoque->save()) {
+            return redirect()->route('estoque.index')->with('message', 'Estoque criado com sucesso!');
+        } else {
+            return redirect()->route('estoque.index')->with('message', 'Erro na criação do estoque!');
+        }
 
     }
 
@@ -54,7 +65,7 @@ class ProdutoController extends Controller
     public function show(Produto $produto)
     {
         return view('produto.show', [
-            'produtos' => $produto
+            'produto' => $produto
         ]);
     }
 

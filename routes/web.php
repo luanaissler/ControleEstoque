@@ -26,15 +26,15 @@ Route::get('/', function () {
 //
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('produto', 'ProdutoController');
+Route::resource('produto', 'ProdutoController')->middleware('auth');
 
-Route::resource('estoque', 'EstoqueController');
+Route::resource('estoque', 'EstoqueController')->middleware('auth');
 
-Route::resource('fornecedor', 'FornecedorController');
+Route::resource('fornecedor', 'FornecedorController')->middleware('auth');
 
-Route::resource('vendedor', 'VendedorController');
+Route::resource('vendedor', 'VendedorController')->middleware('auth');
 
-Route::resource('produtoestoque', 'ProdutoEstoqueController');
+Route::resource('produtoestoque', 'ProdutoEstoqueController')->middleware('auth');
 
 Auth::routes();
 
